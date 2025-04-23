@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camping Tips and Tricks</title>
+    <link rel="stylesheet" href="../startbootstrap-resume-gh-pages/css/Scratch.css">
+</head>
+<body>
+    <div class="page-title-div">
+    <div class="top bar">
+        <h1>Camping Tips and Tricks</h1>
+    </div>
+    </div>
+    <div id="top"></div>
+    <div class="page-wrapper">
+        <h2>My Camping Tips</h2>
+    <p>When camping or trekking, it is important to know the area where you plan to be. Conditions such as weather, common dangers associated with the area, and resources you can utilize.</p>
+    <p>Having the proper tools and skills can make or break your experience.</p>
+    <h4>The following lists include some ideas of where to start.</h4>
+
+    <div class="list-div">
+    <li>Basic tools to learn how to use:</li>
+    </div>
+    <div class="bullet-div">
+    <ul>
+        <li>Compass with a map</li>
+        <li>Knife</li>
+        <li>Moleskin</li>
+        <li>Flint and Steel</li>
+        <li>Trail Markers</li>
+        <li>Paracord</li>
+        <li>Multi-tool</li>
+    </ul>
+    </div>
+    <br>
+<div class="list-div">
+    <li>Basic skills to develop:</li>
+    </div>
+    <ul>
+        <div class="bullet-div">
+        <li>Stamina</li>
+        <li>Bodyweight pullups</li>
+        <li>First-Aid Skills</li>
+        </div>
+    </ul>
+
+    <br>
+
+    <!-- YouTube Video Embed -->
+    <div style="position: relative; width: 100%; max-width: 560px; cursor: pointer;" onclick="playVideo(this)">
+        <img src="https://img.youtube.com/vi/_ybIXSRneoI/hqdefault.jpg" alt="YouTube Thumbnail" style="width: 100%; display: block;">
+        <div style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 64px;
+            color: white;
+            text-shadow: 0 0 10px black;">▶️</div>
+    </div>
+
+    <br>
+    <div class="list-div">
+    <li>Basic know-how:</li>
+    </div>
+    <ul>
+        <div class="bullet-div">
+        <li>Knot-tying</li>
+        <br>
+        <img src="assets/img/th-2559751718.jpg" alt="Some simple knots">
+        <br>
+        <li>Safe fire starting</li>
+        <br>
+        <img src="assets/img/Flint and Steel.jpg" alt="Flint and Steel">
+        <br>
+        <li>Edible plants</li>
+        <li>Safe food preparation</li>
+        <li>Animal Safety</li>
+        <li>The spots with the best views</li>
+        </div>
+    </ul>
+</ol>
+
+<!-- Tableau Map Embed -->
+ <div class="header-div">
+<h2>Best States for Camping (2023)</h2>
+</div>
+<div>
+    <iframe src="https://public.tableau.com/views/BestStatesForCamping2023/Dashboard1?:embed=y&:display_count=yes&:showVizHome=no"
+            allowfullscreen></iframe>
+</div>
+
+<br>
+
+<!-- Navigation Links -->
+<a href="index.html">Resume Page</a>
+<a href="webApp.html">WebApp</a>
+<a href="#top">Back to Top</a>
+
+<!-- Video Playback Script -->
+<script>
+    function playVideo(container) {
+        const iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube.com/embed/_ybIXSRneoI?autoplay=1&list=PLmWUoLyD4VWVS0rfo7Rihl81kT0AO_ICB&index=4";
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "315px";
+        container.innerHTML = "";
+        container.appendChild(iframe);
+    }
+  
+</script>
+<div class="footer bar">
+    <p>&copy; 2025 Camping Tips</p>
+</div>
+</body>
+</html>
