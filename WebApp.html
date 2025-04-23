@@ -118,23 +118,23 @@ function updateStars() {
 
         // Bullets
         let bullets = [];
-        const bulletSpeed = 7;
+        const bulletSpeed = 15;
         const bulletWidth = 5;
         const bulletHeight = 10;
 
         // Alien Bullets
         let alienBullets = [];
-        const alienBulletSpeed = 5;
+        const alienBulletSpeed = 10;
         const alienBulletWidth = 5;
         const alienBulletHeight = 10;
-        const alienShootChance = 0.001; // Chance per frame for an alien to shoot
+        const alienShootChance = 0.01; // Chance per frame for an alien to shoot
 
         // Aliens
         let aliens = [];
-        const alienWidth = 30;
+        const alienWidth = 20;
         const alienHeight = 30;
-        const alienRows = 2; // Reduced from 3
-        const alienCols = 5; // Reduced from 10
+        const alienRows = 3; // Reduced from 3
+        const alienCols = 6; // Reduced from 10
         const alienSpeed = 2;
         let alienDirection = 1;
         const totalAliens = alienRows * alienCols;
@@ -206,7 +206,7 @@ function updateStars() {
 
         // Draw alien bullets
         function drawAlienBullets() {
-            ctx.fillStyle = 'purple';
+            ctx.fillStyle = 'yellow';
             alienBullets.forEach(bullet => {
                 ctx.fillRect(bullet.x, bullet.y, alienBulletWidth, alienBulletHeight);
             });
