@@ -58,7 +58,6 @@
         #restart-button:hover {
             background: darkblue;
         }
-        /* Style for the link to ScratchPage */
         #scratch-link {
             position: absolute;
             bottom: 10px;
@@ -78,8 +77,6 @@
     <div id="win-message">You Win!</div>
     <div id="lose-message">You Lost</div>
     <button id="restart-button">Restart Game</button>
-
-    <!-- Link to ScratchPage -->
     <a id="scratch-link" href="ScratchPage.html">Go to Scratch Page</a>
 
     <script>
@@ -144,27 +141,24 @@
         const alienBulletSpeed = 5;
         const alienBulletWidth = 5;
         const alienBulletHeight = 10;
-        const alienShootChance = 0.001; // Chance per frame for an alien to shoot
+        const alienShootChance = 0.001;
 
         // Aliens
         let aliens = [];
         const alienWidth = 30;
         const alienHeight = 30;
-        const alienRows = 2; // Reduced from 3
-        const alienCols = 5; // Reduced from 10
+        const alienRows = 2;
+        const alienCols = 5;
         const alienSpeed = 2;
         let alienDirection = 1;
         const totalAliens = alienRows * alienCols;
         let aliensDestroyed = 0;
 
-        // Mouse tracking
         let mouseX = 0;
         let mouseY = 0;
 
-        // Game state
         let gameOver = false;
 
-        // Initialize aliens
         function initAliens() {
             aliens = [];
             for (let row = 0; row < alienRows; row++) {
@@ -180,7 +174,6 @@
             }
         }
 
-        // Reset game
         function resetGame() {
             player = {
                 x: canvas.width / 2,
@@ -200,13 +193,125 @@
             initAliens();
         }
 
-        // Game loop
+        function drawPlayer() {
+            if (player.alive) {
+                ctx.fillStyle = 'lime';
+                ctx.fillRect(player.x - player.width / 2, player.y - player.height / 2, player.width, player.height);
+            }
+        }
+
+        function drawBullets() {
+            ctx.fillStyle = 'red';
+            bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x - bullet.width / 2, bullet.y, bullet.width, bullet.height);
+            });
+        }
+
+        function drawAlienBullets() {
+            ctx.fillStyle = 'orange';
+            alienBullets.forEach(bullet => {
+                ctx.fillRect(bullet.x - bullet.width / 2, bullet.y, bullet.width, bullet.height);
+            });
+        }
+
+        function updateBullets() {
+            bullets = bullets.filter(bullet => bullet.y > 0);
+            bullets.forEach(bullet => bullet.y -= bulletSpeed);
+        }
+
+        function updateAlienBullets() {
+            alienBullets = alienBullets.filter(bullet => bullet.y < canvas.height);
+            alienBullets.forEach(bullet => bullet.y += alienBulletSpeed);
+        }
+
+        function aliensShoot() {
+            aliens.forEach(alien => {
+                if (alien.alive && Math.random() < alienShootChance) {
+                    alienBullets.push({
+                        x: alien.x + alien.width / 2,
+                        y: alien.y + alien.height,
+                        width: alienBulletWidth,
+                        height: alienBulletHeight
+                    });
+                }
+            });
+        }
+
+        function updateAliens() {
+            let edgeHit = false;
+            aliens.forEach(alien => {
+                if (alien.alive) {
+                    alien.x += alienSpeed * alienDirection;
+                    if (alien.x + alien.width > canvas.width || alien.x < 0) {
+                        edgeHit = true;
+                    }
+                }
+            });
+            if (edgeHit) {
+                alienDirection *= -1;
+                aliens.forEach(alien => alien.y += 20);
+            }
+        }
+
+        function checkCollisions() {
+            bullets.forEach((bullet, i) => {
+                aliens.forEach((alien, j) => {
+                    if (alien.alive &&
+                        bullet.x < alien.x + alien.width &&
+                        bullet.x + bullet.width > alien.x &&
+                        bullet.y < alien.y + alien.height &&
+                        bullet.y + bullet.height > alien.y) {
+                        alien.alive = false;
+                        bullets.splice(i, 1);
+                        aliensDestroyed++;
+                    }
+                });
+            });
+
+            alienBullets.forEach(bullet => {
+                if (player.alive &&
+                    bullet.x < player.x + player.width / 2 &&
+                    bullet.x > player.x - player.width / 2 &&
+                    bullet.y < player.y + player.height / 2 &&
+                    bullet.y + bullet.height > player.y - player.height / 2) {
+                    player.alive = false;
+                }
+            });
+
+            if (aliensDestroyed === totalAliens) {
+                winMessage.style.display = 'block';
+                restartButton.style.display = 'block';
+                gameOver = true;
+            }
+
+            if (!player.alive) {
+                loseMessage.style.display = 'block';
+                restartButton.style.display = 'block';
+                gameOver = true;
+            }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') player.x -= player.speed;
+            if (e.key === 'ArrowRight') player.x += player.speed;
+            if (e.key === ' ' && player.alive) {
+                bullets.push({
+                    x: player.x,
+                    y: player.y - player.height / 2,
+                    width: bulletWidth,
+                    height: bulletHeight
+                });
+            }
+        });
+
+        restartButton.addEventListener('click', resetGame);
+
         function gameLoop() {
             if (!gameOver) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 updateStars();
-                drawStars(); // Draw star background
+                drawStars();
 
                 drawPlayer();
                 drawBullets();
@@ -221,7 +326,6 @@
             requestAnimationFrame(gameLoop);
         }
 
-        // Start game
         resetGame();
         gameLoop();
     </script>
