@@ -52,10 +52,12 @@ iframe {
 }
 
 .top-bar {
+    height:100px;
     background-color: black;
     color: white;
     padding: 10px 20px;
     border-bottom: 3px solid white;
+    line-height: 100px;
 }
 
 .main-content {
