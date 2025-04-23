@@ -19,6 +19,10 @@ a{
     font-size:large;
     text-decoration:underline;
 }
+.position-div{
+    position: relative;
+    left: 20px;
+}
 .page-title-div{
     border-color: white;
     border-width: 2px;
